@@ -6,11 +6,18 @@
 //
 
 import Foundation
-// TODO: swift doc書く
-public enum FunctionToolType: String, Codable {
-    case function
-    case none
 
+/// Type of FunctionTool.
+///
+/// It's used by only ChatGPT function tools.
+public enum FunctionToolType: String, Codable {
+    /// `function` type
+    case function
+    /// There is no type for function
+    case none
+    
+    /// Initializes a `FunctionToolType` instance from a `FunctionCallingService`.
+    /// - Parameter service: The `FunctionCallingService` to initalize from.
     init(fromService service: FunctionCallingService) {
         switch service {
         case .claude:
@@ -32,7 +39,15 @@ public struct FunctionTool {
         self.function = function
     }
 
-    // TODO: この辺にchat gptのjson構造とそのリンクを貼る
+    /// CodingKeys for ChatGPT
+    ///
+    /// ChatGPT accepts JSON with the following structure.
+    /// ```json
+    /// [{
+    ///  "type": "function",
+    ///  "function": { ...(function decralation)... }
+    /// }]
+    /// ```
     enum ChatGPTCodingKeys: String, CodingKey {
         case type
         case function
@@ -43,7 +58,12 @@ extension FunctionTool: Encodable {
     public func encode(to encoder: any Encoder) throws {
         switch service {
         case .claude:
-            // TODO: この辺にclaudeのjson構造とそのリンクを貼る
+            // Anthropic Claude accepts JSON with the following structure.
+            // ```json
+            // [{
+            //   { ...(function decralation)... }
+            // }]
+            // ```
             var container = encoder.singleValueContainer()
             try container.encode(function)
         case .chatGPT:

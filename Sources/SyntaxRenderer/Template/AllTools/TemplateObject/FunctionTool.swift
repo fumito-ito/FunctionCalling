@@ -9,6 +9,10 @@ import Foundation
 import CommonModules
 
 extension FunctionTool {
+    /// Initializes an `FunctionTool` instance from a `FunctionDeclaration` and  a`FunctionCallingService`.
+    /// - Parameters:
+    ///   - decl: The `FunctionDeclaration` to initialize from.
+    ///   - service: The `FunctionCallingService` to use.
     init(from decl: FunctionDeclaration, service: FunctionCallingService) throws {
         self.init(
             service: service,

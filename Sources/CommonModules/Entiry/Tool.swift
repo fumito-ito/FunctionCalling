@@ -34,14 +34,32 @@ public struct Tool {
         self.inputSchema = inputSchema
     }
 
-    // TODO: この辺にclaudeのjson構造とそのリンクを貼る
+    /// CodingKeys for Anthropic Claude
+    ///
+    /// Anthropic Claude accepts JSON with the following structure.
+    /// ```json
+    /// {
+    ///  "name": "function",
+    ///  "description": "",
+    ///  "input_schema": { ...(json schema for input parameters)... }
+    /// }
+    /// ```
     enum ClaudeCodingKeys: String, CodingKey {
         case name
         case description
         case inputSchema
     }
 
-    // TODO: この辺にchat gptのjson構造とそのリンクを貼る
+    /// CodingKeys for ChatGPT
+    ///
+    /// ChatGPT accepts JSON with the following structure.
+    /// ```json
+    /// {
+    ///  "name": "function",
+    ///  "description": "",
+    ///  "parameters": { ...(json schema for input parameters)... }
+    /// }
+    /// ```
     enum ChatGPTCodingKeys: String, CodingKey {
         case name
         case description
